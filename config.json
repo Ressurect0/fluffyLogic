@@ -1,0 +1,51 @@
+{
+"RDP":
+	{
+	"CVE-2005-1794":
+		{
+	"command": "python3 <path>CVE-2005-1794-check.py <IP>:<port>",
+	"confirm_string": "vulnerable: signatures match, certificate was able to be signed with the hardcoded RSA key"
+		},
+	"FIPScheck":
+		{
+	"command": "nmap -Pn -p <port> --script rdp-enum-encryption <IP>",
+	"confirm_string" : "SSL: SUCCESS"
+		}
+	},
+"test":
+	{"test":
+		{
+		"command": "echo <IP> fire",
+		"confirm_string": "fire"
+		}
+	},
+"SSH":
+	{
+	"algorithms":
+		{
+	"command": "nmap -Pn -p <port> --script ssh2-enum-algos <IP>",
+	"confirm_string": "NA"
+		}
+	},
+"SMB":
+	{
+	"v1":
+		{
+	"command": "nmap -Pn -p <port> --script smb-protocols <IP>",
+	"confirm_string": "smbv1"
+		},
+	"signing":
+		{
+	"command": "nmap -Pn -p <port> --script smb2-security-mode <IP>",
+	"confirm_string": "Message signing enabled but not required"
+		}
+	},
+"axis":
+	{
+	"heapoverflow":
+		{
+	"command": "curl -i http://<IP>:<port>/index.shtml?size=AAAA% --http1.0",
+	"confirm_string": "www-authenticate"
+		}
+	}
+}
